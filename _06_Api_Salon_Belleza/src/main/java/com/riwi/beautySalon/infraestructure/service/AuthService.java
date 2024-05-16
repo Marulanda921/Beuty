@@ -2,6 +2,8 @@ package com.riwi.beautySalon.infraestructure.service;
 
 import java.util.ArrayList;
 
+import com.riwi.beautySalon.api.dto.request.EmployeeRegisterReq;
+import com.riwi.beautySalon.domain.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -87,7 +89,7 @@ public class AuthService implements IAuthService {
                     .userName(request.getUserName())
                     //Guardar la contraseña codificada
                     .password(passwordEncoder.encode(request.getPassword()))
-                    .role(Role.CLIENT)
+                    .role(Role.ADMIN)
                     .build();
         
         /*3. Guardar el nuevo usuario en la db*/
@@ -139,7 +141,42 @@ public class AuthService implements IAuthService {
                 .token(this.jwtService.getToken(userSave))
                 .build();
     }
-    
+
+    @Override
+    public AuthResp registerEmployee(EmployeeRegisterReq request) {
+        /*Validamos que el usuario no exista */
+        User exist = this.findByUserName(request.getUserName());
+
+        if (exist != null) {
+            throw new BadRequestException("El usuario ya está registrado");
+        }
+
+        /*Construimos el usuario */
+
+        User user = User.builder()
+                .userName(request.getUserName())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.EMPLOYEE)
+                .build();
+
+        /*Guardarlos en db */
+        User userSave = this.userRepository.save(user);
+        Employee employee = Employee.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .phone(request.getPhone())
+                .email(request.getEmail())
+                .role(request.getRole())
+                .build();
+
+        this.employeeRepository.save(employee);
+
+        return  AuthResp.builder()
+                .message("Empleado registrado correctamente")
+                .token(this.jwtService.getToken(userSave))
+                .build();
+    }
+
     private User findByUserName(String userName){
         return this.userRepository.findByUserName(userName)
                     .orElse(null);

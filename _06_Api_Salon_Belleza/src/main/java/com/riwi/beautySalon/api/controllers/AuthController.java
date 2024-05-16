@@ -1,5 +1,6 @@
 package com.riwi.beautySalon.api.controllers;
 
+import com.riwi.beautySalon.api.dto.request.EmployeeRegisterReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -44,4 +45,13 @@ public class AuthController {
     ){
         return ResponseEntity.ok(this.authService.registerClient(request));
     }
+
+        @PostMapping(path = "/register/employee")
+    public ResponseEntity<AuthResp> registerEmployee(
+            @Validated @RequestBody EmployeeRegisterReq request
+            )
+        {
+            return ResponseEntity.ok(this.authService.registerEmployee(request));
+        }
+
 }

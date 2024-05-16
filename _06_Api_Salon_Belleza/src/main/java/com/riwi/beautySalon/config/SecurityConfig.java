@@ -1,5 +1,6 @@
 package com.riwi.beautySalon.config;
 
+import com.riwi.beautySalon.utils.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,8 @@ public class SecurityConfig {
 
     //2. Declarar rutas publicas
     private final String[] PUBLIC_RESOURCES = { "/services/public/get", "/auth/**"};
+    //rutas de administrador
+    private final String[] ADMIN_RESOURCES = { "/register/employee"};
 
 
     /**
@@ -38,6 +41,7 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable()) //Desabilitar csrf para apps monoliticas
             .authorizeHttpRequests(authRequest -> authRequest
+                    .requestMatchers(ADMIN_RESOURCES).hasAuthority(Role.ADMIN.name())
                 .requestMatchers(PUBLIC_RESOURCES).permitAll()
                 .anyRequest().authenticated()
             )
