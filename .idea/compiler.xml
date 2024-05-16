@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="holamundo" />
+        <module name="vacants" />
+        <module name="beautySalon" />
+        <module name="primeraweb" />
+        <module name="operaciones" />
+        <module name="products" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="beautySalon" options="-parameters" />
+      <module name="holamundo" options="-parameters" />
+      <module name="operaciones" options="-parameters" />
+      <module name="primeraweb" options="-parameters" />
+      <module name="products" options="-parameters" />
+      <module name="vacants" options="-parameters" />
+    </option>
+  </component>
+</project>

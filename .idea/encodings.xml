@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/_01_holamundo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/_02_primeraWeb/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/_03_Operaciones_API/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/_04_Product_API/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/_05_Api_Vacantes_JPA_DTO/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/_06_Api_Salon_Belleza/src/main/java" charset="UTF-8" />
+  </component>
+</project>
